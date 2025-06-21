@@ -12,7 +12,6 @@ importlib.reload(animation)
 importlib.reload(util)
 importlib.reload(cube_class)
 
-
 def maya_useNewAPI():
     pass
 
@@ -28,10 +27,22 @@ class MayaRubiksCmd(om.MPxCommand):
         return MayaRubiksCmd()
 
     def doIt(self, args):
-        ui.main()
-
+        ui.show_window()
 
 def create_shelf():
+    def _load_window():
+        import importlib
+        import maya_rubiks_ui as ui
+        import maya_rubiks_animation as animation
+        import util
+        import rubiks_cube as cube_class
+        importlib.reload(ui)
+        importlib.reload(animation)
+        importlib.reload(util)
+        importlib.reload(cube_class)
+
+        ui.show_window()
+
     if cmds.shelfLayout('MayaRubiks', exists=True):
         cmds.deleteUI('MayaRubiks', control=True)
 
@@ -42,8 +53,13 @@ def create_shelf():
     except:
         pass
 
-    cmds.shelfButton(label="MayaRubiks", annotation="Simulate solving a rubik's cube.",
-                     image1='../icons/shelf_button.png', command=ui.show_window)
+    cmds.shelfButton(
+        label="MayaRubiks", 
+        annotation="Simulate solving a rubik's cube.",
+        image1='../icons/shelf_button.png', 
+        parent="MayaRubiks",
+        command=_load_window,
+        sourceType="python")
 
 
 def initializePlugin(plugin):
