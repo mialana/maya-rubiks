@@ -2,7 +2,7 @@
 
 ![img](thumbnail.png)
 
-**[Video Demo Link](https://youtu.be/wKXn7nVkqU4)**
+**[Demo Video](https://youtu.be/wKXn7nVkqU4)**
 
 ### Overview
 
